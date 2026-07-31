@@ -3,7 +3,9 @@ mod error;
 mod secret;
 
 pub use client::*;
-pub use error::*;
+pub use dandanapi::*;
 pub use secret::*;
 
-pub type Result<T> = std::result::Result<T, Error>;
+pub use error::Error as DandanapiError;
+
+pub type Result<T> = std::result::Result<T, DandanapiError>;

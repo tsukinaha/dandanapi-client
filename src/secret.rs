@@ -2,7 +2,7 @@ use std::str::FromStr;
 
 use reqwest::header::{HeaderMap, HeaderValue};
 
-use crate::{Error, Result};
+use crate::{DandanapiError, Result};
 
 #[derive(Debug, Clone)]
 pub struct RequestHeaderGenerator {
@@ -24,7 +24,7 @@ impl Default for RequestHeaderGenerator {
 impl RequestHeaderGenerator {
     pub fn new(x_appid: String, secret_generator: SecretGenerator) -> Result<Self> {
         let Some(secret) = secret_generator.generate_plaintext() else {
-            return Err(Error::SecretGenerationError(
+            return Err(DandanapiError::SecretGenerationError(
                 "Failed to generate secret".to_string(),
             ));
         };

@@ -2,7 +2,7 @@ use std::sync::{LazyLock, OnceLock};
 
 use dandanapi::{ClientPrelude, Request, Route};
 
-use crate::secret::{RequestHeaderGenerator, SecretGenerator};
+use crate::{DandanapiError, secret::{RequestHeaderGenerator, SecretGenerator}};
 
 static HEADER_GENERATOR: OnceLock<RequestHeaderGenerator> = OnceLock::new();
 
@@ -16,7 +16,7 @@ impl DanDanClient {
         let request_header_generator = RequestHeaderGenerator::new(x_appid, secret_generator)?;
         HEADER_GENERATOR
             .set(request_header_generator)
-            .map_err(|_| crate::Error::SecretGenerationError("Already initialized".into()))
+            .map_err(|_| DandanapiError::SecretGenerationError("Already initialized".into()))
     }
 
     pub fn with_client(client: reqwest::Client) -> Self {
