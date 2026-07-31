@@ -3,6 +3,7 @@ name = "dandanapi-client"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
+description = "A Rust client for the dandanapi API."
 
 [dependencies]
 dandanapi = "0.2"
